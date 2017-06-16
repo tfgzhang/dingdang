@@ -19,8 +19,9 @@ const _executePure = (pureName) =>
 
 const _executeEffect = (effectName) =>
     (immutableStore, data) =>
-        new Promise((resolve, reject) =>
-            immutableStore.getIn(['effect', effectName])({resolve, reject}, data))
+        (executePure) =>
+            new Promise((resolve, reject) =>
+                immutableStore.getIn(['effect', effectName])({resolve, reject, executePure}, data))
 
 
 export default executor;

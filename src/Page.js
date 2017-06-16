@@ -75,7 +75,7 @@ export default function (store) {
                         ...this.state,
                         useStore: this.state.useStore.set('state', executor(executorEnum)(name)(this.state.useStore, data))
                     }, () => this.state.notifyList.map(func => func())) :
-                    executor(executorEnum)(name)(this.state.useStore, data, this._executor)
+                    executor(executorEnum)(name)(this.state.useStore, data)(this._executor)
 
         }
     }

@@ -13,11 +13,12 @@ let store = {
         }
     },
     effect: {
-        queryUser: async ({resolve, reject}, num) => {
+        queryUser: async ({resolve, reject , executePure}, num) => {
             const {code, datas} = await fetch(`http://wx.xiaoqiangong.com/goods/${num}.htm`).then(response => response.json());
             if (code === '10000') {
                 let name = datas[Math.ceil(Math.random() * 10)]['c_name'];
-                resolve(name)
+                executePure(Constant.EXECUTOR_TYPE.PURE)('onChangeState')({name})
+                resolve(true)
             } else {
                 reject(false)
             }
@@ -37,6 +38,9 @@ export default class User extends React.Component {
 
         const {injectProps: {name}, executor} = this.props;
 
+        const queryUser = executor(Constant.EXECUTOR_TYPE.EFFECT)('queryUser');
+
+        const onChangeState = executor(Constant.EXECUTOR_TYPE.PURE)('onChangeState');
 
         return (
             <div>
@@ -46,8 +50,8 @@ export default class User extends React.Component {
                 <br />
                 <br />
                 <button onClick={ async () => {
-                    const data = await executor(Constant.EXECUTOR_TYPE.EFFECT)('queryUser')(1000001);
-                    executor(Constant.EXECUTOR_TYPE.PURE)('onChangeState')({name: data})
+                    const data = await queryUser(1000001);
+                    console.log(data)
                 }}>改变名字
                 </button>
             </div>

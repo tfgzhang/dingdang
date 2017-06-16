@@ -1,8 +1,6 @@
-# dingdang 
+# dingdang ( 一个管理react数据层的产品 ) 
 
-## 一个管理react数据层的产品
-
-### 设计思路
+## 设计思路
 
 - store 分为3个级别
     - 单页面store （store 随着单个页面的生命周期而变动！）
@@ -10,10 +8,10 @@
     - 全局store （ 全局store 内的数据 为只读数据 ， 只有当项目初次加载时才拥有一次赋值的机会！）
     
     
-### 已完成部分
+## 已完成部分
 - 单页面store
 
-### API
+## API
 
 Page装饰器： 需要放置一个store参数， store对象必须拥有 namespace 、 state 、 pure 、 effect 4个指定字段
 

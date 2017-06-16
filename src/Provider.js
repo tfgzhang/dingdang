@@ -4,12 +4,16 @@
 
 
 import React, {Component} from "react";
+import {fromJS} from "immutable";
 
 export default class Provider extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {}
+        this.state = {
+            sceneStore: fromJS(),           //场景store
+            globalStore:fromJS()        //全局stroe
+        }
     }
 
     static defaultProps = {}
